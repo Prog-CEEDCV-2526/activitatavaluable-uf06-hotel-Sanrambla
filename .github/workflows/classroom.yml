@@ -1,0 +1,46 @@
+name: Classroom Autograding
+
+on:
+  push:
+    branches: [ main, master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    - name: Run Maven tests
+      run: mvn -B test --file pom.xml
+      continue-on-error: true
+
+    - name: Nota
+      if: always()
+      run: |
+        echo "Estoy escribiendo desde el proyecto git"
+        # Extraer totales desde Surefire
+        total=$(grep -h "Tests run:" target/surefire-reports/*.txt | awk '{print $3}' | cut -d',' -f1 | paste -sd+ - | bc)
+        failures=$(grep -h "Failures:" target/surefire-reports/*.txt | awk '{print $5}' | cut -d',' -f1 | paste -sd+ - | bc)
+        errors=$(grep -h "Errors:" target/surefire-reports/*.txt | awk '{print $7}' | cut -d',' -f1 | paste -sd+ - | bc)
+
+        passed=$((total - failures - errors))
+
+        # Calcular nota sobre 10 (float con 2 decimales)
+        nota=$(awk "BEGIN {printf \"%.2f\", ($passed / $total) * 10}")
+
+        echo "PASSED=$passed" >> grading_results.txt
+        echo "TOTAL=$total" >> grading_results.txt
+        echo "GRADE=$nota" >> grading_results.txt
+
+        # Mostrar en Summary (estético)
+        echo "## Resultados" >> $GITHUB_STEP_SUMMARY
+        echo "- Test superats: $passed" >> $GITHUB_STEP_SUMMARY
+        echo "- Test totals: $total" >> $GITHUB_STEP_SUMMARY
+        echo "- Nota: **$nota**" >> $GITHUB_STEP_SUMMARY
+        

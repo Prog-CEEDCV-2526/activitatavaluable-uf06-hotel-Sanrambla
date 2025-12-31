@@ -1,0 +1,21 @@
+{
+  "tests": [
+    { "name": "Test Main Bucle Ixir", "setup": "mvn -B package --file pom.xml", "run": "mvn -Dtest=AppTest#testMainBucleIxit test", "timeout": 200000, "max_score": 1 },
+    { "name": "Inicialitzar Preus", "setup": "mvn -B package --file pom.xml", "run": "mvn -Dtest=AppTest#testInicialitzarPreus test", "timeout": 200000, "max_score": 2 },
+    { "name": "Mostrar Menú", "setup": "mvn -B package --file pom.xml", "run": "mvn -Dtest=AppTest#testMostrarMenu test", "timeout": 200000, "max_score": 1 },
+    { "name": "Gestionar Opció Invàlida", "setup": "mvn -B package --file pom.xml", "run": "mvn -Dtest=AppTest#testGestionarOpcioInvalida test", "timeout": 200000, "max_score": 1 },
+    { "name": "Reservar Habitació", "setup": "mvn -B package --file pom.xml", "run": "mvn -Dtest=AppTest#testReservarHabitacioCreaReservaIDisminueixDisponibilitat test", "timeout": 200000, "max_score": 3 },
+    { "name": "Seleccionar Tipus Habitació Suite", "setup": "mvn -B package --file pom.xml", "run": "mvn -Dtest=AppTest#testSeleccionarTipusHabitacioSuite test", "timeout": 200000, "max_score": 1 },
+    { "name": "Seleccionar Tipus Habitació Disponible", "setup": "mvn -B package --file pom.xml", "run": "mvn -Dtest=AppTest#testSeleccionarTipusHabitacioDisponibleAmbDisponibilitat test", "timeout": 200000, "max_score": 1 },
+    { "name": "Seleccionar Tipus Habitació Sense Disponibilitat", "setup": "mvn -B package --file pom.xml", "run": "mvn -Dtest=AppTest#testSeleccionarTipusHabitacioDisponibleSenseDisponibilitat test", "timeout": 200000, "max_score": 1 },
+    { "name": "Seleccionar Serveis Sense Cap Servei", "setup": "mvn -B package --file pom.xml", "run": "mvn -Dtest=AppTest#testSeleccionarServeisSenseCapServei test", "timeout": 200000, "max_score": 2 },
+    { "name": "Calcular Preu Total Habitació + Servei", "setup": "mvn -B package --file pom.xml", "run": "mvn -Dtest=AppTest#testCalcularPreuTotalHabitacioMesServei test", "timeout": 200000, "max_score": 2 },
+    { "name": "Generar Codi Reserva Rang i Únic", "setup": "mvn -B package --file pom.xml", "run": "mvn -Dtest=AppTest#testGenerarCodiReservaRangIUnic test", "timeout": 200000, "max_score": 3 },
+    { "name": "Alliberar Habitació", "setup": "mvn -B package --file pom.xml", "run": "mvn -Dtest=AppTest#testAlliberarHabitacioIncrementaDisponibilitatIEliminaReserva test", "timeout": 200000, "max_score": 3 },
+    { "name": "Consultar Disponibilitat", "setup": "mvn -B package --file pom.xml", "run": "mvn -Dtest=AppTest#testConsultarDisponibilitatMostraTaula test", "timeout": 200000, "max_score": 1 },
+    { "name": "Llistar Reserves Per Tipus", "setup": "mvn -B package --file pom.xml", "run": "mvn -Dtest=AppTest#testLlistarReservesPerTipusFiltraCorrectament test", "timeout": 200000, "max_score": 2 },
+    { "name": "Obtindre Reserva", "setup": "mvn -B package --file pom.xml", "run": "mvn -Dtest=AppTest#testObtindreReservaMostraReserva test", "timeout": 200000, "max_score": 2 },
+    { "name": "Obtindre Reserva Per Tipus", "setup": "mvn -B package --file pom.xml", "run": "mvn -Dtest=AppTest#testObtindreReservaPerTipusMostraNomésEixeTipus test", "timeout": 200000, "max_score": 2 },
+    { "name": "Mostrar Dades Reserva", "setup": "mvn -B package --file pom.xml", "run": "mvn -Dtest=AppTest#testMostrarDadesReserva test", "timeout": 200000, "max_score": 2 }
+  ]
+}
