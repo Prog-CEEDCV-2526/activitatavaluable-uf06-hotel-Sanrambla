@@ -125,7 +125,7 @@ public class App {
         else if (opcio == 6)
             System.out.println("Adeu");
         else
-            System.out.println("Opció incorrecta!");
+            System.out.println("Opció no vàlida");
 
     }
 
@@ -146,7 +146,7 @@ public class App {
             reserva.add(serveisSeleccionats.get(i));
         reserva.add(Float.toString(preu));
         reserves.put(codi, reserva);
-        System.out.println(String.format("Habitació %s reservada amb codi %d", tipus, codi));
+        System.out.println(String.format("Habitació %s reservada amb Codi de reserva %d", tipus, codi));
     }
 
     /**
@@ -204,7 +204,7 @@ public class App {
                 return TIPUS_DELUXE;
 
         System.out.println("Opció incorrecta");
-        return seleccionarTipusHabitacio();
+        return null;
     }
 
     /**
@@ -216,14 +216,20 @@ public class App {
         ArrayList<String> serveisSeleccionats = new ArrayList<String>();
         System.out.println("Aquestos son els serveis disponibles:");
         do {
+            System.out.println("0.- Finalitzar");
             System.out.println(String.format("1.- %s", SERVEI_ESMORZAR));
             System.out.println(String.format("2.- %s", SERVEI_GIMNAS));
             System.out.println(String.format("3.- %s", SERVEI_SPA));
             System.out.println(String.format("4.- %s", SERVEI_PISCINA));
-            System.out.println("5.- Cap");
-            servei = llegirEnter("Seleccione una opció: ");
-            if (servei < 1 || servei > 5)
+            System.out.println("Vol afegir un servei? (s/n): ");
+            String volServei = sc.next();
+            if (volServei != "s")
+                return serveisSeleccionats;
+            servei = llegirEnter("Seleccione servei: ");
+            if (servei < 0 || servei > 4)
                 System.out.println("Opció Incorrecta");
+            else if (servei == 0)
+                return serveisSeleccionats;
             else if (servei == 1 && !serveisSeleccionats.contains(SERVEI_ESMORZAR))
                 serveisSeleccionats.add(SERVEI_ESMORZAR);
             else if (servei == 2 && !serveisSeleccionats.contains(SERVEI_GIMNAS))
@@ -232,8 +238,6 @@ public class App {
                 serveisSeleccionats.add(SERVEI_SPA);
             else if (servei == 4 && !serveisSeleccionats.contains(SERVEI_PISCINA))
                 serveisSeleccionats.add(SERVEI_PISCINA);
-            else if (servei == 5)
-                return serveisSeleccionats;
         } while (true);
 
     }
@@ -278,7 +282,7 @@ public class App {
             disponibilitatHabitacions.put(tipusHabitacio, disponibilitatHabitacions.get(tipusHabitacio) + 1);
             reserves.remove(codi);
         } else {
-            System.out.println("Reserva no encontrada");
+            System.out.println("Codi no encontrado: " + codi);
         }
     }
 
@@ -286,7 +290,7 @@ public class App {
      * Mostra la disponibilitat actual de les habitacions (lliures i ocupades).
      */
     public static void consultarDisponibilitat() {
-        System.out.println("TIPUS\t\tLLIURES\tOCUPADES");
+        System.out.println("Tipus\t\tLliures\tOcupades");
         mostrarDisponibilitatTipus(TIPUS_ESTANDARD);
         mostrarDisponibilitatTipus(TIPUS_SUITE);
         mostrarDisponibilitatTipus(TIPUS_DELUXE);
@@ -337,6 +341,7 @@ public class App {
      */
     public static void mostrarDadesReserva(int codi) {
         ArrayList<String> reserva = reserves.get(codi);
+        System.out.println("Codi: " + codi);
         System.out.println("Tipus: " + reserva.get(0));
         System.out.println("Serveis: ");
         for (int i = 1; i < reserva.size() - 1; i++)

@@ -70,7 +70,7 @@ public class AppTest {
         // Simulem que l’alumne tria directament l’opció 6 (Ixir)
         setInput("6\n");
 
-        String out = captureOutput(() -> App.main(new String[]{}));
+        String out = captureOutput(() -> App.main(new String[] {}));
 
         assertTrue(out.contains("MENÚ PRINCIPAL"));
         assertTrue(out.contains("Eixint del sistema"));
@@ -265,7 +265,7 @@ public class AppTest {
         r2.add("120.0");
         App.reserves.put(222, r2);
 
-        int[] codis = {111, 222};
+        int[] codis = { 111, 222 };
 
         String out = captureOutput(() -> App.llistarReservesPerTipus(codis, App.TIPUS_ESTANDARD));
 
@@ -324,10 +324,10 @@ public class AppTest {
         ArrayList<String> dades = new ArrayList<>();
         dades.add(App.TIPUS_SUITE);
         dades.add("150.0");
-        dades.add(App.SERVEI_SPA);  // posició 2
-        dades.add("");              // posició 3
-        dades.add("");              // posició 4
-        dades.add("");              // posició 5
+        dades.add(App.SERVEI_SPA); // posició 2
+        dades.add(""); // posició 3
+        dades.add(""); // posició 4
+        dades.add(""); // posició 5
         App.reserves.put(codi, dades);
 
         String out = captureOutput(() -> App.mostrarDadesReserva(codi));
